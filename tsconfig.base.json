@@ -15,7 +15,14 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@gloomhaven-tracker/api-interfaces": [
+        "libs/api-interfaces/src/index.ts"
+      ],
+      "@gloomhaven-tracker/common-library": [
+        "libs/common-library/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
