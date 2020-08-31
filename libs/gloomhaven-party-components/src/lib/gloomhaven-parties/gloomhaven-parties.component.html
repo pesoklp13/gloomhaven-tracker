@@ -1,0 +1,11 @@
+<div class="parties-container">
+  <ght-party-card *ngFor="let party of parties" [party]="party">Simple card</ght-party-card>
+  <ng-template [ngIf]="parties.length === 0">
+    <div>No parties available. Please create one.</div>
+  </ng-template>
+</div>
+<div class="parties-buttons">
+  <button mat-raised-button mat-fab color="accent" aria-label="Example icon button with a delete icon">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

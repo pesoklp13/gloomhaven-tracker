@@ -1,0 +1,23 @@
+@import 'colors';
+
+@include mat-core();
+
+// instead of creating a theme with mat-light-theme like a sane person, we will create our own theme-creating function that lets us apply our own foreground and background palettes.
+@function buildTheme($primary, $accent, $warn: mat-palette($mat-red)) {
+  @return (
+    primary: $primary,
+    accent: $accent,
+    warn: $warn,
+    is-dark: false,
+    foreground: $ghThemeDarkForeground,
+    background: $ghThemeDarkBackground,
+  );
+}
+
+$ghThemePrimary: mat-palette($ghPrimaryColor);
+$ghThemeAccent: mat-palette($ghAccentColor);
+$ghThemeWarn: mat-palette($ghWarnColor);
+
+$ghTheme: buildTheme($ghThemePrimary, $ghThemeAccent, $ghThemeWarn);
+
+@include angular-material-theme($ghTheme);

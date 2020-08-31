@@ -1,0 +1,105 @@
+mat-card, mat-card-content {
+  display: flex;
+}
+
+mat-card {
+  background-image: url("/bg/wood.png");
+
+  mat-card {
+    background-color: transparent;
+    background-image: none;
+  }
+}
+
+mat-card-header {
+  align-self: center;
+
+  &.party-info {
+    min-width: 200px;
+    max-width: 250px;
+
+    ::ng-deep.mat-card-header-text {
+      width: 100%;
+    }
+
+    mat-icon {
+      flex-shrink: 0;
+    }
+  }
+}
+
+mat-card-content mat-card {
+  border: none;
+  box-shadow: none;
+}
+
+.mat-card-avatar {
+  width: 60px;
+  height: 60px;
+}
+
+.character-avatar-Brute {
+  background-image: url('/avatar/brute.jpg');
+  background-size: cover;
+  align-self: center;
+}
+
+.character-avatar-Cragheart {
+  background-image: url('/avatar/cragheart.jpg');
+  background-size: cover;
+  align-self: center;
+}
+
+.character-avatar-Spellweaver {
+  background-image: url('/avatar/spellweaver.jpg');
+  background-size: cover;
+  align-self: center;
+}
+
+.character-avatar-Scoundrel {
+  background-image: url('/avatar/scoundrel.jpg');
+  background-size: cover;
+  align-self: center;
+}
+
+.character-avatar-Mindthief {
+  background-image: url('/avatar/mindthief.jpg');
+  background-size: cover;
+  align-self: center;
+}
+
+.character-avatar-Tinkerer {
+  background-image: url('/avatar/tinkerer.jpg');
+  background-size: cover;
+  align-self: center;
+}
+
+.party-name {
+  display: flex;
+  justify-content: center;
+}
+
+.party-attributes, .hero-attributes {
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.party-location {
+  display: flex;
+  align-items: center;
+
+  span {
+    align-self: center;
+    padding-left: 10px;
+  }
+}
+
+.hero {
+  min-width: 200px;
+  max-width: 250px;
+
+  mat-card-header, ::ng-deep.mat-card-header-text {
+    width: 100%;
+  }
+}

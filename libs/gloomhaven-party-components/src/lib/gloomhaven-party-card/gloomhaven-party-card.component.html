@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-header class="party-info">
+    <mat-card-title class="party-name">{{party.name}}</mat-card-title>
+    <mat-card-subtitle class="party-attributes">
+      <mat-icon svgIcon="reputation" [matBadge]="party.reputation" matBadgeOverlap="false" matBadgeColor="accent" matBadgeSize="small" matTooltip="Reputation"></mat-icon>
+      <mat-icon svgIcon="prosperity" [matBadge]="party.prosperity" matBadgeOverlap="false" matBadgeColor="accent" matBadgeSize="small" matTooltip="Prosperity"></mat-icon>
+      <mat-icon svgIcon="level" [matBadge]="party.level" matBadgeOverlap="false" matBadgeColor="accent" matBadgeSize="small" matTooltip="Party level"></mat-icon>
+    </mat-card-subtitle>
+    <mat-card-subtitle class="party-location" matTooltip="Current location">
+      <mat-icon svgIcon="map"></mat-icon> <span>{{party.location?.name || 'Gloomhaven'}}</span>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-divider [vertical]="true"></mat-divider>
+    <mat-card class="hero" *ngFor="let hero of party.members">
+      <mat-card-header>
+        <div mat-card-avatar class="character-avatar-{{hero.type.name}} mat-card-avatar"></div>
+        <mat-card-title>{{hero.name}}</mat-card-title>
+        <mat-card-subtitle>{{hero.type.name}}</mat-card-subtitle>
+        <mat-card-subtitle class="hero-attributes">
+          <mat-icon svgIcon="experience" [matBadge]="hero.exp" matBadgeOverlap="false" matBadgeColor="accent" matBadgeSize="small" matTooltip="Experience"></mat-icon>
+          <mat-icon svgIcon="treasure" [matBadge]="hero.gold" matBadgeOverlap="false" matBadgeColor="accent" matBadgeSize="small" matTooltip="Gold"></mat-icon>
+          <mat-icon svgIcon="level" [matBadge]="hero.level" matBadgeOverlap="false" matBadgeColor="accent" matBadgeSize="small" matTooltip="Level"></mat-icon>
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </mat-card-content>
+</mat-card>

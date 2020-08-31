@@ -1,0 +1,143 @@
+@import '~@angular/material/theming';
+
+// The rest of this is like a normal theme.scss file. The only difference being that we use create-wonky-theme instead of mat-light-theme
+$ghPrimaryColor: (
+  50 : #e9e7e5,
+  100 : #c9c2be,
+  200 : #a59a93,
+  300 : #817267,
+  400 : #665347,
+  500 : #4b3526,
+  600 : #443022,
+  700 : #3b281c,
+  800 : #332217,
+  900 : #23160d,
+  A100 : #ff9a63,
+  A200 : #ff7930,
+  A400 : #fc5900,
+  A700 : #e35000,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+$ghAccentColor: (
+  50 : #e4eaf0,
+  100 : #bbcada,
+  200 : #8da7c2,
+  300 : #5f84a9,
+  400 : #3d6996,
+  500 : #1b4f84,
+  600 : #18487c,
+  700 : #143f71,
+  800 : #103667,
+  900 : #082654,
+  A100 : #88b0ff,
+  A200 : #558eff,
+  A400 : #226cff,
+  A700 : #085bff,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+$ghWarnColor: (
+  50 : #f2e7e7,
+  100 : #dfc3c4,
+  200 : #ca9b9c,
+  300 : #b47374,
+  400 : #a45557,
+  500 : #943739,
+  600 : #8c3133,
+  700 : #812a2c,
+  800 : #772324,
+  900 : #651617,
+  A100 : #ff9e9f,
+  A200 : #ff6b6d,
+  A400 : #ff383b,
+  A700 : #ff1f22,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+// custom background and foreground palettes
+$ghThemeDarkBackground: (
+  status-bar: #186213,
+  app-bar:    map_get($ghPrimaryColor, 800),
+  background: map_get($ghPrimaryColor, 200),
+  hover:      rgba(white, 0.04),
+  card:       map_get($mat-brown, 500),
+  dialog:     map_get($mat-grey, 800),
+  disabled-button: $white-12-opacity,
+  raised-button: map-get($mat-grey, 600),
+  focused-button: $white-6-opacity,
+  selected-button: map_get($mat-grey, 900),
+  selected-disabled-button: map_get($mat-grey, 800),
+  disabled-button-toggle: black,
+  unselected-chip: map_get($ghPrimaryColor, 400),
+  disabled-list-option: black,
+);
+
+$ghThemeDarkForeground: (
+  base:              yellow,
+  divider:           $white-12-opacity,
+  dividers:          $white-12-opacity,
+  disabled:          rgba(white, 0.3),
+  disabled-button:   rgba(white, 0.3),
+  disabled-text:     rgba(white, 0.3),
+  hint-text:         rgba(white, 0.3),
+  secondary-text:    rgba(white, 0.7),
+  icon:              white,
+  icons:             white,
+  text:              #e6e6e6,
+  slider-min:        white,
+  slider-off:        rgba(white, 0.3),
+  slider-off-active: rgba(white, 0.3),
+);
+
+$scrollYellow: #bfbf8a;
+$titleBlue: #1B4F84;
+$titleGreen: #186213;
+$titleRed: #943739;
+$fontColor: #53361D;
+$lineColor: #695A4A;

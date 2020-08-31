@@ -10,7 +10,7 @@
       },
       "root": "apps/gloomhaven-tracker",
       "sourceRoot": "apps/gloomhaven-tracker/src",
-      "prefix": "gloomhaven-tracker",
+      "prefix": "ght",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -23,7 +23,16 @@
             "aot": true,
             "assets": [
               "apps/gloomhaven-tracker/src/favicon.ico",
-              "apps/gloomhaven-tracker/src/assets"
+              {
+                "input": "apps/gloomhaven-tracker/src/assets",
+                "glob": "**/*",
+                "output": "/"
+              },
+              {
+                "input": "libs/gloomhaven-party-components/src/assets",
+                "glob": "**/*",
+                "output": "assets/gloomhaven"
+              }
             ],
             "styles": ["apps/gloomhaven-tracker/src/styles.scss"],
             "scripts": []
@@ -176,6 +185,133 @@
             "tsConfig": "libs/common-library/tsconfig.spec.json",
             "passWithNoTests": true
           }
+        }
+      }
+    },
+    "gloomhaven-party-components": {
+      "projectType": "library",
+      "root": "libs/gloomhaven-party-components",
+      "sourceRoot": "libs/gloomhaven-party-components/src",
+      "prefix": "ght",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/gloomhaven-party-components/tsconfig.lib.json",
+              "libs/gloomhaven-party-components/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/gloomhaven-party-components/**/*"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/gloomhaven-party-components/jest.config.js",
+            "tsConfig": "libs/gloomhaven-party-components/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/gloomhaven-party-components/src/test-setup.ts"
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/gloomhaven-party-components/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/gloomhaven-party-components",
+            "config": {
+              "configFolder": "libs/gloomhaven-party-components/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      }
+    },
+    "common-components": {
+      "projectType": "library",
+      "root": "libs/common-components",
+      "sourceRoot": "libs/common-components/src",
+      "prefix": "ght",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/common-components/tsconfig.lib.json",
+              "libs/common-components/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/common-components/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/common-components/jest.config.js",
+            "tsConfig": "libs/common-components/tsconfig.spec.json",
+            "passWithNoTests": true,
+            "setupFile": "libs/common-components/src/test-setup.ts"
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/common-components/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/common-components",
+            "config": {
+              "configFolder": "libs/common-components/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
         }
       }
     }

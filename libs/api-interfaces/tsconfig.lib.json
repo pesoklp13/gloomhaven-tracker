@@ -8,5 +8,10 @@
     "types": ["node"]
   },
   "exclude": ["**/*.spec.ts"],
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts"],
+  "paths": {
+    "@gloomhaven-tracker/common-library": [
+      "../libs/common-library/src/index.ts"
+    ]
+  }
 }

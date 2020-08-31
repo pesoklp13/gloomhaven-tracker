@@ -21,6 +21,12 @@
       ],
       "@gloomhaven-tracker/common-library": [
         "libs/common-library/src/index.ts"
+      ],
+      "@gloomhaven-tracker/gloomhaven-party-components": [
+        "libs/gloomhaven-party-components/src/index.ts"
+      ],
+      "@gloomhaven-tracker/common-components": [
+        "libs/common-components/src/index.ts"
       ]
     }
   },

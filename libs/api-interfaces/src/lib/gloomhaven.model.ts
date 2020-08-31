@@ -51,21 +51,71 @@ export interface GloomhavenStatus {
 
 }
 
+export enum GloomhavenCharacterName {
+  Brute = "Brute",
+  Cragheart = "Cragheart",
+  Mindthief = "Mindthief",
+  Scoundrel = "Scoundrel",
+  Spellweaver = "Spellweaver",
+  Tinkerer = "Tinkerer"
+}
+
+export enum GloomhavenCharacterAvatar {
+  Brute = "/avatar/brute.jpg",
+  Cragheart = "/avatar/cragheart.jpg",
+  Mindthief = "/avatar/mindthief.jpg",
+  Scoundrel = "/avatar/scoundrel.jpg",
+  Spellweaver = "/avatar/spellweaver.jpg",
+  Tinkerer = "/avatar/tinkerer.jpg"
+}
+
+// TODO@pesok add cards for character
+//  add battle cards
+//  perk list
+export interface GloomhavenCharacterClass {
+  name: GloomhavenCharacterName;
+}
+
+export class BruteClass implements GloomhavenCharacterClass {
+  name = GloomhavenCharacterName.Brute;
+}
+
+export class CragheartClass implements GloomhavenCharacterClass {
+  name = GloomhavenCharacterName.Cragheart;
+}
+
+export class MindthiefClass implements GloomhavenCharacterClass {
+  name = GloomhavenCharacterName.Mindthief;
+}
+
+export class ScoundrelClass implements GloomhavenCharacterClass {
+  name = GloomhavenCharacterName.Scoundrel;
+}
+
+export class SpellweaverClass implements GloomhavenCharacterClass {
+  name = GloomhavenCharacterName.Spellweaver;
+}
+
+export class TinkererClass implements GloomhavenCharacterClass {
+  name = GloomhavenCharacterName.Tinkerer;
+}
+
 /**
  * Representation of the Character Sheet
  */
 export interface GloomhavenCharacter {
   name: string;
+  type: GloomhavenCharacterClass;
   level: number;
   exp: number;
   gold: number;
-  items: Array<GloomhavenItem>;
-  notes: string;
-  checks: number;
-  perks: Array<GloomhavenPerk>;
-  personalQuest: GloomhavenPersonalQuest;
-  handSize: number;
-  health: number;
+  items?: Array<GloomhavenItem>;
+  notes?: string;
+  checks?: number;
+  perks?: Array<GloomhavenPerk>;
+  personalQuest?: GloomhavenPersonalQuest;
+  handSize?: number;
+  health?: number;
 }
 
 export interface GloomhavenPartyAchievement {
@@ -86,27 +136,16 @@ export interface GloomhavenScenarioReward {
 }
 
 export interface GloomhavenScenario {
+  name: string;
   /**
    * linked scenarios for which road event is not resolved
    */
-  linkedScenarios: Array<GloomhavenScenario>;
+  linkedScenarios?: Array<GloomhavenScenario>;
   /**
    * scenarios opened after completion of this scenario
    */
-  openScenarios: Array<GloomhavenScenario>;
-  partyAchievement: GloomhavenPartyAchievement;
-}
-
-/**
- * representation of the Party Sheet
- */
-export interface GloomhavenParty {
-  name: string;
-  location: GloomhavenScenario;
-  notes: string;
-  achievements: Array<GloomhavenPartyAchievement>;
-  reputation: number;
-  members: Array<GloomhavenCharacter>;
+  openScenarios?: Array<GloomhavenScenario>;
+  partyAchievement?: GloomhavenPartyAchievement;
 }
 
 export interface GloomhavenProsperity {
@@ -162,10 +201,25 @@ export interface GloomhavenScenarioResult {
   party: GloomhavenParty;
 }
 
-export interface GloomhavenCampaign {
-  party: GloomhavenParty;
+/**
+ * representation of the Party Sheet
+ */
+export interface GloomhavenParty {
+  /**
+   * Precomputed level of party
+   */
+  level: number;
+  name: string;
+  location?: GloomhavenScenario;
+  notes?: string;
+  achievements?: Array<GloomhavenPartyAchievement>;
+  reputation: number;
+  members: Array<GloomhavenCharacter>;
+  prosperity: GloomhavenProsperity;
+}
+
+export interface GloomhavenCampaign extends GloomhavenParty {
   availableScenarios: Array<GloomhavenScenario>;
   story: LinkedList<GloomhavenScenarioResult | GloomhavenCityEvent | GloomhavenRoadEvent>;
-  prosperity: GloomhavenProsperity;
   globalAchievements: Array<GloomhavenGlobalAchievement>
 }
