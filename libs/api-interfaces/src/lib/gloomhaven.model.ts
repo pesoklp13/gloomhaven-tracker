@@ -1,15 +1,15 @@
 import { LinkedList } from "@gloomhaven-tracker/common-library";
 
 export interface GloomhavenPersonalQuest {
-
+  name: string;
 }
 
 export interface GloomhavenPerk {
-
+  name: string;
 }
 
 export interface GloomhavenAttackModifier {
-
+  description: string;
 }
 
 export enum GloomhavenItemConsumptionEnum {
@@ -48,7 +48,7 @@ export interface GloomhavenItem {
  * status such a poison, etc.
  */
 export interface GloomhavenStatus {
-
+  name: string;
 }
 
 export enum GloomhavenCharacterName {
@@ -119,15 +119,15 @@ export interface GloomhavenCharacter {
 }
 
 export interface GloomhavenPartyAchievement {
-
+  name: string;
 }
 
 export interface GloomhavenGlobalAchievement {
-
+  name: string;
 }
 
 export interface GloomhavenScenarioRewardEffect {
-
+  name: string;
 }
 
 export interface GloomhavenScenarioReward {
@@ -149,7 +149,7 @@ export interface GloomhavenScenario {
 }
 
 export interface GloomhavenProsperity {
-
+  value: number;
 }
 
 export enum GloomhavenEventDecisionEnum {
@@ -185,10 +185,12 @@ export interface GloomhavenEvent {
   trackNumber: number;
 }
 
+// tslint:disable-next-line:no-empty-interface
 export interface GloomhavenCityEvent extends GloomhavenEvent {
 
 }
 
+// tslint:disable-next-line:no-empty-interface
 export interface GloomhavenRoadEvent extends GloomhavenEvent {
 
 }
@@ -215,7 +217,7 @@ export interface GloomhavenParty {
   achievements?: Array<GloomhavenPartyAchievement>;
   reputation: number;
   members: Array<GloomhavenCharacter>;
-  prosperity: GloomhavenProsperity;
+  prosperity: number;
 }
 
 export interface GloomhavenCampaign extends GloomhavenParty {

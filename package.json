@@ -35,7 +35,8 @@
   },
   "husky": {
     "hooks": {
-      "commit-msg": "yarn commit-msg -E $HUSKY_GIT_PARAMS"
+      "commit-msg": "yarn commit-msg -E $HUSKY_GIT_PARAMS",
+      "pre-push": "yarn affected:lint && yarn affected:test"
     }
   },
   "private": true,

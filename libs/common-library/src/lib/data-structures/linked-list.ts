@@ -54,7 +54,7 @@ export class LinkedList<T> implements Iterable<T>{
 
   private head?: ListNode<T>;
   private tail?: ListNode<T>;
-  private _size: number = 0;
+  private _size = 0;
 
   public append(value: T): void {
     if(!this.head) {
@@ -63,7 +63,7 @@ export class LinkedList<T> implements Iterable<T>{
       return;
     }
 
-    let appendedNode = {
+    const appendedNode = {
       value,
       previous: this.tail
     }
@@ -80,7 +80,7 @@ export class LinkedList<T> implements Iterable<T>{
       return;
     }
 
-    let prependedNode = {
+    const prependedNode = {
       value,
       next: this.head
     }

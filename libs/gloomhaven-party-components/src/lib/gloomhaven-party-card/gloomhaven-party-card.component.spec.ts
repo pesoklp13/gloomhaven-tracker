@@ -1,8 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { GloomhavenPartyCardComponent } from './gloomhaven-party-card.component';
-import { MaterialModule, MatIconRegistryModule } from "@gloomhaven-tracker/common-components";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
+// tslint:disable-next-line:nx-enforce-module-boundaries
 import { MaterialMockModule } from "../../../../common-components/src/lib/material/material-mock.module.spec";
 
 describe('GloomhavenPartyCardComponent', () => {
