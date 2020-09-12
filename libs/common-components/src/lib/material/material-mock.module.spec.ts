@@ -11,6 +11,7 @@ import { MatDividerModule } from "@angular/material/divider";
 import { MatTooltipModule } from "@angular/material/tooltip";
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'mat-icon',
   template: '<span></span>'
 })
