@@ -1,0 +1,104 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.0.0
+
+# Reusable Commands
+commands:
+  yarn_install_and_cache:
+    description: 'Install & Cache Dependencies'
+    steps:
+      - run: yarn install --immutable
+      - save_cache:
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+            - node_modules
+
+  restore_yarn_cache:
+    description: 'Restore Cached Dependencies'
+    steps:
+      - restore_cache:
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+            - yarn-packages- # used if checksum fails
+
+  setup:
+    description: 'Setup Executor'
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/project
+
+# Available Jobs
+jobs:
+  initialise:
+    executor:
+      name: node/default
+      tag: '12.18.3'
+    steps:
+      - checkout
+      - restore_yarn_cache
+      - yarn_install_and_cache
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - node_modules
+            - dist
+
+  lint:
+    executor:
+      name: node/default
+      tag: '12.18.3'
+    steps:
+      - setup
+      - run:
+          name: Lint all affected projects
+          command: yarn nx affected:lint --base=master --head=HEAD
+
+  build:
+    executor:
+      name: node/default
+      tag: '12.18.3'
+    steps:
+      - setup
+      - run:
+          name: Build all affected projects
+          command: yarn nx affected:build --base=master --head=HEAD
+
+  test:
+    executor:
+      name: node/default
+      tag: '12.18.3'
+    steps:
+      - setup
+      - run:
+          name: Run all affected tests
+          command: yarn nx affected:test --base=master --head=HEAD
+
+  e2e:
+    executor:
+      name: node/default
+      tag: '12.18.3'
+    steps:
+      - setup
+      - run:
+          name: Run all affected E2E tests
+          command: yarn nx affected:e2e --base=master --head=HEAD
+
+workflows:
+  build-and-test:
+    jobs:
+      - initialise
+      - lint:
+          requires:
+            - initialise
+      - build:
+          requires:
+            - lint
+      - test:
+          requires:
+            - lint
+      - e2e:
+          requires:
+            - lint
