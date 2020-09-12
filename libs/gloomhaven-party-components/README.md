@@ -1,7 +1,16 @@
-# gloomhaven-party-components
+# Gloomhaven party management
 
-This library was generated with [Nx](https://nx.dev).
+Components for party management, tracking campaign/party progress over time.
 
-## Running unit tests
+## Gloomhaven party card
 
-Run `nx test gloomhaven-party-components` to execute the unit tests.
+Representation of party (campaign) overview with basic information available.
+
+## Gloomhaven parties
+
+List of created parties responsible for managing (deletion, creation) them. 
+
+### Additional functionality
+
+* Show extended party/campaign overview.
+* Allow to continue the campaign (or adventure).
