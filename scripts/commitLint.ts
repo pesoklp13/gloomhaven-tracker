@@ -97,7 +97,7 @@ class SubjectValidatorHandler {
 
 const subjectValidatorHandler = new SubjectValidatorHandler();
 subjectValidatorHandler.register((subject, next) => {
-    const match = subject.match(/#[\d]\s(?<subject>.*)/) as any;
+    const match = subject.match(/#[\d]+\s(?<subject>.*)/) as any;
 
     if (!match?.groups.subject) {
       console.error(`${FgRed}%s${Reset}\n`, "Rule 9 violation: Subject has to start with #<issue> <subject>");
