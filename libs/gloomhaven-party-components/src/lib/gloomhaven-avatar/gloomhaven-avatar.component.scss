@@ -1,0 +1,48 @@
+.mat-card-avatar {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+
+  &.avatar-thumbnail {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.gloomhaven-avatar-Brute {
+  background-image: url('/avatar/brute.jpg');
+  background-size: cover;
+  align-self: center;
+}
+
+.gloomhaven-avatar-Cragheart {
+  background-image: url('/avatar/cragheart.jpg');
+  background-size: cover;
+  align-self: center;
+}
+
+.gloomhaven-avatar-Spellweaver {
+  background-image: url('/avatar/spellweaver.jpg');
+  background-size: cover;
+  align-self: center;
+}
+
+.gloomhaven-avatar-Scoundrel {
+  background-image: url('/avatar/scoundrel.jpg');
+  background-size: cover;
+  align-self: center;
+}
+
+.gloomhaven-avatar-Mindthief {
+  background-image: url('/avatar/mindthief.jpg');
+  background-size: cover;
+  align-self: center;
+}
+
+.gloomhaven-avatar-Tinkerer {
+  background-image: url('/avatar/tinkerer.jpg');
+  background-size: cover;
+  align-self: center;
+}
