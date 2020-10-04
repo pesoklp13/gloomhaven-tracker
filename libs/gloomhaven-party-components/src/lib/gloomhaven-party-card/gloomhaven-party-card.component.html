@@ -14,7 +14,7 @@
     <mat-divider [vertical]="true"></mat-divider>
     <mat-card class="hero" *ngFor="let hero of party.members">
       <mat-card-header>
-        <div mat-card-avatar class="character-avatar-{{hero.type.name}} mat-card-avatar"></div>
+        <ght-avatar [name]="hero.type.name"></ght-avatar>
         <mat-card-title>{{hero.name}}</mat-card-title>
         <mat-card-subtitle>{{hero.type.name}}</mat-card-subtitle>
         <mat-card-subtitle class="hero-attributes">

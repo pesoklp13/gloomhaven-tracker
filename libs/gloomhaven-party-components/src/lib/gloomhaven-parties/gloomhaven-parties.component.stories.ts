@@ -16,6 +16,7 @@ import { MatIconRegistryModule } from "../../../../common-components/src";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatButtonModule } from "@angular/material/button";
+import { GloomhavenAvatarComponent } from "../gloomhaven-avatar/gloomhaven-avatar.component";
 
 export default {
   title: "GloomhavenPartiesComponent",
@@ -131,6 +132,7 @@ const Template = (args: GloomhavenPartiesComponent & { name: string }) => {
   return {
     moduleMetadata: {
       declarations: [
+        GloomhavenAvatarComponent,
         GloomhavenPartyCardComponent
       ],
       imports: [
