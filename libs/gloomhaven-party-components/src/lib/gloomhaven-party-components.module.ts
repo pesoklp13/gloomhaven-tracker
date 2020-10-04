@@ -4,6 +4,7 @@ import { GloomhavenPartiesComponent } from "./gloomhaven-parties/gloomhaven-part
 import { MaterialModule } from "@gloomhaven-tracker/common-components";
 import { GloomhavenPartyCardComponent } from './gloomhaven-party-card/gloomhaven-party-card.component';
 import { GloomhavenAvatarComponent } from "./gloomhaven-avatar/gloomhaven-avatar.component";
+import { GloomhavenPartySelectorComponent } from "./gloomhaven-party-selector/gloomhaven-party-selector.component";
 
 @NgModule({
   imports: [
@@ -13,12 +14,14 @@ import { GloomhavenAvatarComponent } from "./gloomhaven-avatar/gloomhaven-avatar
   declarations: [
     GloomhavenAvatarComponent,
     GloomhavenPartiesComponent,
-    GloomhavenPartyCardComponent
+    GloomhavenPartyCardComponent,
+    GloomhavenPartySelectorComponent
   ],
   exports: [
     GloomhavenAvatarComponent,
     GloomhavenPartiesComponent,
-    GloomhavenPartyCardComponent
+    GloomhavenPartyCardComponent,
+    GloomhavenPartySelectorComponent
   ]
 })
 export class GloomhavenPartyComponentsModule {}
