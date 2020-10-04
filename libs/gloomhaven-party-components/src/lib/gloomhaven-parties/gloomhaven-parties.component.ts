@@ -1,21 +1,20 @@
-import { Component, Inject, OnInit } from "@angular/core";
-import { GloomhavenParty, PARTY_SERVICE_TOKEN, PartyService } from "@gloomhaven-tracker/api-interfaces";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { GloomhavenParty } from "@gloomhaven-tracker/api-interfaces";
 
 @Component({
   selector: 'ght-parties',
   templateUrl: './gloomhaven-parties.component.html',
   styleUrls: ['./gloomhaven-parties.component.scss']
 })
-export class GloomhavenPartiesComponent implements OnInit {
+export class GloomhavenPartiesComponent{
 
+  @Input()
   parties: Array<GloomhavenParty>;
 
-  constructor(@Inject(PARTY_SERVICE_TOKEN) public partyService: PartyService) {
-    this.partyService.getParties().subscribe((parties) => {
-      this.parties = parties;
-    });
-  }
+  @Output()
+  addParty: EventEmitter<void> = new EventEmitter<void>();
 
-  ngOnInit(): void {}
+  @Output()
+  selectParty: EventEmitter<GloomhavenParty> = new EventEmitter<GloomhavenParty>();
 
 }
