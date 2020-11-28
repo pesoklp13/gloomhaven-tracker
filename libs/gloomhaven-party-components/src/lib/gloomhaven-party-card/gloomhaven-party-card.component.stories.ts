@@ -1,6 +1,7 @@
 import { MatCardModule } from "@angular/material/card";
 import { GloomhavenPartyCardComponent } from "./gloomhaven-party-card.component";
 import { object, withKnobs } from "@storybook/addon-knobs";
+// tslint:disable-next-line:nx-enforce-module-boundaries
 import {
   BruteClass,
   GloomhavenParty,
@@ -10,6 +11,7 @@ import {
 } from "../../../../api-interfaces/src";
 import { MatBadgeModule } from "@angular/material/badge";
 import { MatIconModule } from "@angular/material/icon";
+// tslint:disable-next-line:nx-enforce-module-boundaries
 import { MatIconRegistryModule } from "../../../../common-components/src";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatTooltipModule } from "@angular/material/tooltip";

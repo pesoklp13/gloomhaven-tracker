@@ -1,22 +1,27 @@
 <div class="parties-container">
-  <div class="party" *ngFor="let party of parties">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>{{party.name}}</mat-card-title>
+  <div class="party" *ngFor="let party of parties" (click)="selectPartyClicked($event, party)">
+    <mat-card #card>
+      <mat-card-header class="party-info">
+        <mat-card-title class="party-name">{{party.name}}</mat-card-title>
+        <mat-card-subtitle class="party-location" matTooltip="Current location">
+          <mat-icon svgIcon="map"></mat-icon>
+          <span>{{party.location?.name || 'Gloomhaven'}}</span>
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          <div class="party-members">
+            <ght-avatar *ngFor="let hero of party.members" [name]="hero.type.name" [thumbnail]="true"
+                        [matTooltip]="hero.type.name"></ght-avatar>
+          </div>
+        </mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content>
-        TBD
-      </mat-card-content>
     </mat-card>
   </div>
-  <div class="party"> <!-- TODO@pesok handle add button functionality, maybe extract -->
-    <mat-card>
+  <div class="party" (click)="createNewPartyClicked($event)"> <!-- TODO@pesok handle add button functionality, maybe extract -->
+    <mat-card #addNew>
       <mat-card-header>
         <mat-card-title>Create new party</mat-card-title>
       </mat-card-header>
-      <mat-card-content>
-
-      </mat-card-content>
+      <mat-card-content></mat-card-content>
     </mat-card>
   </div>
 </div>

@@ -33,47 +33,6 @@ mat-card-content mat-card {
   box-shadow: none;
 }
 
-.mat-card-avatar {
-  width: 60px;
-  height: 60px;
-}
-
-.character-avatar-Brute {
-  background-image: url('/avatar/brute.jpg');
-  background-size: cover;
-  align-self: center;
-}
-
-.character-avatar-Cragheart {
-  background-image: url('/avatar/cragheart.jpg');
-  background-size: cover;
-  align-self: center;
-}
-
-.character-avatar-Spellweaver {
-  background-image: url('/avatar/spellweaver.jpg');
-  background-size: cover;
-  align-self: center;
-}
-
-.character-avatar-Scoundrel {
-  background-image: url('/avatar/scoundrel.jpg');
-  background-size: cover;
-  align-self: center;
-}
-
-.character-avatar-Mindthief {
-  background-image: url('/avatar/mindthief.jpg');
-  background-size: cover;
-  align-self: center;
-}
-
-.character-avatar-Tinkerer {
-  background-image: url('/avatar/tinkerer.jpg');
-  background-size: cover;
-  align-self: center;
-}
-
 .party-name {
   display: flex;
   justify-content: center;

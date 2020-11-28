@@ -62,3 +62,13 @@ main {
 .mat-drawer-container {
   background-image: url("/bg/paper.png");
 }
+
+.accent-active {
+  box-shadow: inset 2000px 0 0 0 rgba(8, 91, 255, 0.5) !important;
+  border-color: rgba(8, 91, 255, 1) !important;
+}
+
+.accent-focus {
+  box-shadow: inset 2000px 0 0 0 rgba(16, 54, 103, 0.5);
+  border-color: rgba(16, 54, 103, 1);
+}
