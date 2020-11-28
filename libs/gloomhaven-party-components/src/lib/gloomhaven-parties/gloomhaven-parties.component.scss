@@ -2,21 +2,6 @@
   margin: 5px;
 }
 
-.parties-buttons, .parties-container div {
-  display: flex;
-  justify-content: center;
-}
-
-.party-selector {
-  margin: 5px;
-  background-image: url("/bg/dark_wood.png");
-  padding: 20px;
-  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
-  color: #e6e6e6;
-  display: flex
-}
-
 .parties-container {
   display: flex;
   flex-direction: column;
@@ -27,6 +12,12 @@
     min-width: 200px;
     max-width: 250px;
 
+    &:hover {
+      box-shadow: inset 2000px 0 0 0 rgba(16, 54, 103, 0.5);
+      border-color: rgba(16, 54, 103, 1);
+      cursor: pointer;
+    }
+
     mat-card {
       background-color: transparent;
       background-image: none;
@@ -34,16 +25,39 @@
   }
 }
 
-.party-summary {
-  display: flex;
-  flex: 1;
-  background-image: url("/bg/wood.png");
-  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
-  margin-left: 20px;
+mat-card-header {
+  align-self: center;
 
-  mat-card {
-    background-color: transparent;
-    background-image: none;
+  &.party-info {
+    min-width: 200px;
+    max-width: 250px;
+
+    ::ng-deep.mat-card-header-text {
+      width: 100%;
+    }
+
+    mat-icon {
+      flex-shrink: 0;
+    }
   }
+}
+
+.party-name {
+  display: flex;
+  justify-content: center;
+}
+
+.party-location {
+  display: flex;
+  align-items: center;
+
+  span {
+    align-self: center;
+    padding-left: 10px;
+  }
+}
+
+.party-members {
+  display: flex;
+  justify-content: space-evenly;
 }

@@ -3,6 +3,7 @@ import { GloomhavenPartyCardComponent } from './gloomhaven-party-card.component'
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
 // tslint:disable-next-line:nx-enforce-module-boundaries
 import { MaterialMockModule } from "../../../../common-components/src/lib/material/material-mock.module.spec";
+import { GloomhavenAvatarComponent } from "../gloomhaven-avatar/gloomhaven-avatar.component";
 
 describe('GloomhavenPartyCardComponent', () => {
   let component: GloomhavenPartyCardComponent;
@@ -14,7 +15,10 @@ describe('GloomhavenPartyCardComponent', () => {
         NoopAnimationsModule,
         MaterialMockModule
       ],
-      declarations: [ GloomhavenPartyCardComponent ]
+      declarations: [
+        GloomhavenPartyCardComponent,
+        GloomhavenAvatarComponent
+      ]
     })
     .compileComponents();
   }));

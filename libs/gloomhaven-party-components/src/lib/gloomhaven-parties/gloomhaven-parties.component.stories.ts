@@ -1,25 +1,27 @@
 import { GloomhavenPartiesComponent } from "./gloomhaven-parties.component";
 import { MatCardModule } from "@angular/material/card";
+// tslint:disable-next-line:nx-enforce-module-boundaries
 import {
   BruteClass,
   CragheartClass,
-  GloomhavenParty, MindthiefClass,
-  PARTY_SERVICE_TOKEN,
-  PartyService, ScoundrelClass, SpellweaverClass, TinkererClass
+  MindthiefClass,
+  ScoundrelClass,
+  SpellweaverClass,
+  TinkererClass
 } from "../../../../api-interfaces/src";
-import { Observable, of } from "rxjs";
-import { GloomhavenPartyCardComponent } from "../gloomhaven-party-card/gloomhaven-party-card.component";
 import { MatBadgeModule } from "@angular/material/badge";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDividerModule } from "@angular/material/divider";
+// tslint:disable-next-line:nx-enforce-module-boundaries
 import { MatIconRegistryModule } from "../../../../common-components/src";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatButtonModule } from "@angular/material/button";
 import { GloomhavenAvatarComponent } from "../gloomhaven-avatar/gloomhaven-avatar.component";
+import { withKnobs } from "@storybook/addon-knobs";
 
 export default {
   title: "GloomhavenPartiesComponent",
+  component: GloomhavenPartiesComponent,
   parameters: {
     backgrounds: {
       default: "dark",
@@ -29,14 +31,41 @@ export default {
         }
       ]
     }
-  }
+  },
+  decorators: [withKnobs]
 };
 
-const getPartyServiceInstance = (storyName: string): PartyService => {
-  let data = [];
+const moduleMetadata = {
+  declarations: [
+    GloomhavenAvatarComponent,
+    GloomhavenPartiesComponent
+  ],
+  imports: [
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatBadgeModule,
+    MatIconModule,
+    MatDividerModule,
+    MatTooltipModule,
+    MatIconRegistryModule
+  ]
+};
 
-  if (storyName === "Three Parties")
-    data = [
+export const NoParties = () => ({
+  moduleMetadata,
+  component: GloomhavenPartiesComponent,
+  template: `<ght-parties [parties]="parties"></ght-parties>`,
+  props: {
+    parties: []
+  }
+});
+
+export const ThreeParties = () => ({
+  moduleMetadata,
+  component: GloomhavenPartiesComponent,
+  template: `<ght-parties [parties]="parties"></ght-parties>`,
+  props: {
+    parties: [
       {
         name: "test party 1",
         reputation: 0,
@@ -44,14 +73,14 @@ const getPartyServiceInstance = (storyName: string): PartyService => {
         level: 1,
         members: [
           {
-            name: 'member1',
+            name: "member1",
             exp: 0,
             gold: 0,
             level: 1,
             type: new BruteClass()
           },
           {
-            name: 'member2',
+            name: "member2",
             exp: 0,
             gold: 0,
             level: 1,
@@ -66,14 +95,14 @@ const getPartyServiceInstance = (storyName: string): PartyService => {
         level: 1,
         members: [
           {
-            name: 'member1',
+            name: "member1",
             exp: 0,
             gold: 0,
             level: 1,
             type: new SpellweaverClass()
           },
           {
-            name: 'member2',
+            name: "member2",
             exp: 0,
             gold: 0,
             level: 1,
@@ -88,28 +117,28 @@ const getPartyServiceInstance = (storyName: string): PartyService => {
         level: 1,
         members: [
           {
-            name: 'member1',
+            name: "member1",
             exp: 0,
             gold: 0,
             level: 1,
             type: new BruteClass()
           },
           {
-            name: 'member2',
+            name: "member2",
             exp: 0,
             gold: 0,
             level: 1,
             type: new ScoundrelClass()
           },
           {
-            name: 'member3',
+            name: "member3",
             exp: 0,
             gold: 0,
             level: 1,
             type: new MindthiefClass()
           },
           {
-            name: 'member4',
+            name: "member4",
             exp: 0,
             gold: 0,
             level: 1,
@@ -117,42 +146,6 @@ const getPartyServiceInstance = (storyName: string): PartyService => {
           }
         ]
       }
-    ];
-
-  return {
-
-    getParties(): Observable<Array<GloomhavenParty>> {
-      return of(data);
-    }
-
-  };
-};
-
-const Template = (args: GloomhavenPartiesComponent & { name: string }) => {
-  return {
-    moduleMetadata: {
-      declarations: [
-        GloomhavenAvatarComponent,
-        GloomhavenPartyCardComponent
-      ],
-      imports: [
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatBadgeModule,
-        MatIconModule,
-        MatDividerModule,
-        MatTooltipModule,
-        MatButtonModule,
-        MatIconRegistryModule
-      ],
-      providers: [
-        { provide: PARTY_SERVICE_TOKEN, useValue: getPartyServiceInstance(args.name) }
-      ]
-    },
-    component: GloomhavenPartiesComponent,
-    props: args
-  };
-};
-
-export const NoParties = Template.bind({});
-export const ThreeParties = Template.bind({});
+    ]
+  }
+});
