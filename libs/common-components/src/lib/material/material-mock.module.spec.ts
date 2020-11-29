@@ -9,6 +9,8 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatBadgeModule } from "@angular/material/badge";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatDialogModule } from "@angular/material/dialog";
+import { A11yModule } from "@angular/cdk/a11y";
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -31,7 +33,9 @@ class MatMockIconComponent {
     MatSidenavModule,
     MatBadgeModule,
     MatDividerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule,
+    A11yModule
   ],
   exports: [
     FlexLayoutModule,
@@ -43,7 +47,9 @@ class MatMockIconComponent {
     MatBadgeModule,
     MatDividerModule,
     MatTooltipModule,
-    MatMockIconComponent
+    MatMockIconComponent,
+    MatDialogModule,
+    A11yModule
   ]
 })
 export class MaterialMockModule {

@@ -1,6 +1,6 @@
 <div class="parties-container">
-  <div class="party" *ngFor="let party of parties" (click)="selectPartyClicked($event, party)">
-    <mat-card #card>
+  <div class="party" *ngFor="let party of parties">
+    <mat-card #card (click)="selectPartyClicked($event, party)">
       <mat-card-header class="party-info">
         <mat-card-title class="party-name">{{party.name}}</mat-card-title>
         <mat-card-subtitle class="party-location" matTooltip="Current location">
@@ -15,9 +15,12 @@
         </mat-card-subtitle>
       </mat-card-header>
     </mat-card>
+    <div class="delete-action" (click)="deletePartyClicked($event, party)">
+      <mat-icon>delete</mat-icon>
+    </div>
   </div>
-  <div class="party" (click)="createNewPartyClicked($event)"> <!-- TODO@pesok handle add button functionality, maybe extract -->
-    <mat-card #addNew>
+  <div class="party"> <!-- TODO@pesok handle add button functionality, maybe extract -->
+    <mat-card #addNew (click)="createNewPartyClicked($event)">
       <mat-card-header>
         <mat-card-title>Create new party</mat-card-title>
       </mat-card-header>
