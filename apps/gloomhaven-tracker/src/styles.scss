@@ -63,6 +63,32 @@ main {
   background-image: url("/bg/paper.png");
 }
 
+.mat-dialog-container {
+  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 1), 0px 24px 38px 3px rgba(0, 0, 0, 0.42), 0px 9px 46px 8px rgba(0, 0, 0, 0.42);
+  background-image: url("/bg/wood.png");
+
+  .mat-dialog-actions {
+    justify-content: center;
+  }
+
+  .mat-button:hover:not(.mat-button-disabled) .mat-button-focus-overlay {
+    opacity: 0.55;
+  }
+
+  .mat-button:focus .mat-button-focus-overlay {
+    opacity: 0.4;
+  }
+
+  .mat-button.cdk-keyboard-focused .mat-button-focus-overlay {
+    opacity: 0.4;
+  }
+
+  .mat-button-focus-overlay {
+    background: #943739;
+    opacity: 0.4;
+  }
+}
+
 .accent-active {
   box-shadow: inset 2000px 0 0 0 rgba(8, 91, 255, 0.5) !important;
   border-color: rgba(8, 91, 255, 1) !important;

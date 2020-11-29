@@ -10,6 +10,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatBadgeModule } from "@angular/material/badge";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatDialogModule } from "@angular/material/dialog";
+import { A11yModule } from "@angular/cdk/a11y";
 
 @NgModule({
   imports: [
@@ -23,7 +25,9 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     MatIconModule,
     MatBadgeModule,
     MatDividerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule,
+    A11yModule
   ],
   exports: [
     FlexLayoutModule,
@@ -35,7 +39,9 @@ import { MatTooltipModule } from "@angular/material/tooltip";
     MatIconModule,
     MatBadgeModule,
     MatDividerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule,
+    A11yModule
   ]
 })
 export class MaterialModule { }
