@@ -3,6 +3,8 @@ import { GloomhavenParty } from "@gloomhaven-tracker/api-interfaces";
 import { MatDialog } from "@angular/material/dialog";
 import { DeletePartyDialogComponent } from "./modal/delete-party-dialog.component";
 
+const ACCENT_ACTIVE = "accent-active";
+
 @Component({
   selector: "ght-parties",
   templateUrl: "./gloomhaven-parties.component.html",
@@ -10,32 +12,36 @@ import { DeletePartyDialogComponent } from "./modal/delete-party-dialog.componen
 })
 export class GloomhavenPartiesComponent {
 
+  constructor(private renderer: Renderer2, private dialog: MatDialog) {}
+
   @Input()
   parties: Array<GloomhavenParty>;
 
   @Output()
-  addParty: EventEmitter<void> = new EventEmitter<void>();
+  addParty: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Output()
-  selectParty: EventEmitter<GloomhavenParty> = new EventEmitter<GloomhavenParty>();
+  selectParty: EventEmitter<GloomhavenParty | null> = new EventEmitter<GloomhavenParty | null>();
 
   @Output()
   deleteParty: EventEmitter<GloomhavenParty> = new EventEmitter<GloomhavenParty>();
 
   @ViewChildren("card, addNew", { read: ElementRef }) cardRefs: QueryList<ElementRef>;
 
-  constructor(private renderer: Renderer2, private dialog: MatDialog) {}
+  private static isAlreadyActive(element: HTMLElement): boolean {
+    return element.classList.contains(ACCENT_ACTIVE);
+  }
 
   selectPartyClicked($event: MouseEvent, party: GloomhavenParty) {
-    this.toggleActive($event);
+    const activated = this.toggleActive($event);
 
-    this.selectParty.emit(party);
+    this.selectParty.emit(activated ? party : null);
   }
 
   createNewPartyClicked($event: MouseEvent) {
-    this.toggleActive($event);
+    const activated = this.toggleActive($event);
 
-    this.addParty.emit();
+    this.addParty.emit(activated);
   }
 
   deletePartyClicked($event: MouseEvent, party: GloomhavenParty) {
@@ -51,11 +57,24 @@ export class GloomhavenPartiesComponent {
       });
   }
 
-  private toggleActive($event: MouseEvent) {
+  private toggleActive($event: MouseEvent): boolean {
+    const currentElement = $event.currentTarget as any;
+    if (GloomhavenPartiesComponent.isAlreadyActive(currentElement)) {
+      this.removeActive($event);
+
+      return false;
+    }
+
     this.cardRefs.forEach(element => {
-      this.renderer.removeClass(element.nativeElement, "accent-active");
+      this.renderer.removeClass(element.nativeElement, ACCENT_ACTIVE);
     });
 
-    this.renderer.addClass($event.currentTarget, "accent-active");
+    this.renderer.addClass($event.currentTarget, ACCENT_ACTIVE);
+
+    return true;
+  }
+
+  private removeActive($event: MouseEvent) {
+    this.renderer.removeClass($event.currentTarget, ACCENT_ACTIVE);
   }
 }

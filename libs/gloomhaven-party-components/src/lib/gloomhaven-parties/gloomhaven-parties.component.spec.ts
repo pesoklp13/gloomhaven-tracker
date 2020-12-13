@@ -8,10 +8,15 @@ import { GloomhavenParty } from "@gloomhaven-tracker/api-interfaces";
 import { MatDialog } from "@angular/material/dialog";
 import { of } from "rxjs";
 
-const createMouseEventStub = (): any => {
+const createMouseEventStub = (cls: Array<string> = []): any => {
   return {
     currentTarget: {
-      childNodes: []
+      childNodes: [],
+      classList: {
+        contains: (inputCls: string) => {
+          return cls.includes(inputCls);
+        }
+      }
     }
   };
 }
@@ -37,7 +42,9 @@ describe("GloomhavenPartiesComponent", () => {
     fixture = TestBed.createComponent(GloomhavenPartiesComponent);
     const renderer2 = fixture.componentRef.injector.get<Renderer2>(Renderer2 as Type<Renderer2>);
     const addClassSpy = jest.spyOn(renderer2, "addClass");
+    const removeClassSpy = jest.spyOn(renderer2, "removeClass");
     addClassSpy.mockImplementation(() => {});
+    removeClassSpy.mockImplementation(() => {});
 
     matDialog = fixture.componentRef.injector.get<MatDialog>(MatDialog as Type<MatDialog>);
 
@@ -61,12 +68,31 @@ describe("GloomhavenPartiesComponent", () => {
     expect(emitSpy).toBeCalledWith(party);
   });
 
-  it("should emit add new party", () => {
+  it("should emit deselect party", () => {
+    const party: GloomhavenParty = {
+      name: "Test Party"
+    } as any;
+    const emitSpy = jest.spyOn(component.selectParty, 'emit');
+
+    component.selectPartyClicked(createMouseEventStub(["accent-active"]), party);
+
+    expect(emitSpy).toBeCalledWith(null);
+  });
+
+  it("should emit add new party with 'true'", () => {
     const emitSpy = jest.spyOn(component.addParty, 'emit');
 
     component.createNewPartyClicked(createMouseEventStub());
 
-    expect(emitSpy).toBeCalled();
+    expect(emitSpy).toBeCalledWith(true);
+  });
+
+  it("should emit add new party with 'false'", () => {
+    const emitSpy = jest.spyOn(component.addParty, 'emit');
+
+    component.createNewPartyClicked(createMouseEventStub(["accent-active"]));
+
+    expect(emitSpy).toBeCalledWith(false);
   });
 
   it("should emit delete party when confirmed deletion", fakeAsync(() => {

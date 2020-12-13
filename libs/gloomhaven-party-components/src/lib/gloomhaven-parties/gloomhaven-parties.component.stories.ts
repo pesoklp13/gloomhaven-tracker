@@ -18,6 +18,7 @@ import { MatTooltipModule } from "@angular/material/tooltip";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { GloomhavenAvatarComponent } from "../gloomhaven-avatar/gloomhaven-avatar.component";
 import { withKnobs } from "@storybook/addon-knobs";
+import { MatDialogModule } from "@angular/material/dialog";
 
 export default {
   title: "GloomhavenPartiesComponent",
@@ -38,7 +39,7 @@ export default {
 const moduleMetadata = {
   declarations: [
     GloomhavenAvatarComponent,
-    GloomhavenPartiesComponent
+    GloomhavenPartiesComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -47,7 +48,8 @@ const moduleMetadata = {
     MatIconModule,
     MatDividerModule,
     MatTooltipModule,
-    MatIconRegistryModule
+    MatIconRegistryModule,
+    MatDialogModule
   ]
 };
 
