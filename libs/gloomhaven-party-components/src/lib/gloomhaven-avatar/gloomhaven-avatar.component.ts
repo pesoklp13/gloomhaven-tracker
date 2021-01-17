@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { GloomhavenCharacterName } from "@gloomhaven-tracker/api-interfaces";
 
 @Component({
@@ -6,7 +6,8 @@ import { GloomhavenCharacterName } from "@gloomhaven-tracker/api-interfaces";
   templateUrl: './gloomhaven-avatar.component.html',
   styleUrls: [
     './gloomhaven-avatar.component.scss'
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GloomhavenAvatarComponent {
 

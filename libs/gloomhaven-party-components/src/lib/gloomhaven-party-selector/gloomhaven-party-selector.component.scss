@@ -5,7 +5,14 @@
   box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   border-radius: 4px;
   color: #e6e6e6;
-  display: flex
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 800px) {
+  .party-selector {
+    flex-direction: column;
+  }
 }
 
 .party-summary {

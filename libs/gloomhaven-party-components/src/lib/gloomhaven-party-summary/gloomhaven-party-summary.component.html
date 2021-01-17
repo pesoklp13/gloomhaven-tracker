@@ -1,0 +1,73 @@
+<div *ngIf="party == null">Please select party or create a new one.</div>
+<div *ngIf="party != null" class="party-summary">
+
+  <div class="summary-content">
+    <div class="page">
+      <h2>Party: {{party.name}}</h2>
+      <div class="gloomhaven-container">
+        <div>
+          <mat-icon svgIcon="map"></mat-icon>
+          Current location: {{party.location || 'Gloomhaven'}}
+        </div>
+        <div>
+          <mat-icon svgIcon="map"></mat-icon>
+          Journal
+        </div>
+        <div>
+          <mat-icon svgIcon="map"></mat-icon>
+          Notes
+        </div>
+        <div>
+          <mat-icon svgIcon="map"></mat-icon>
+          Go to
+        </div>
+      </div>
+      <h3>Members</h3>
+      <div class="party-members">
+        <div class="party-member" *ngFor="let hero of party.members">
+          <div class="party-member_info">
+            <ght-avatar [name]="hero.type.name"></ght-avatar>
+            <div class="name_type_holder">
+              <div class="name">{{hero.name}}</div>
+              <div class="type">{{hero.type.name}}</div>
+            </div>
+          </div>
+          <div class="party-member_attributes">
+            <mat-icon svgIcon="experience" [matBadge]="hero.exp" matBadgeOverlap="false" matBadgeColor="accent"
+                      matBadgeSize="small" matTooltip="Experience"></mat-icon>
+            <mat-icon svgIcon="treasure" [matBadge]="hero.gold" matBadgeOverlap="false" matBadgeColor="accent"
+                      matBadgeSize="small" matTooltip="Gold"></mat-icon>
+            <mat-icon svgIcon="level" [matBadge]="hero.level" matBadgeOverlap="false" matBadgeColor="accent"
+                      matBadgeSize="small" matTooltip="Level"></mat-icon>
+          </div>
+        </div>
+      </div>
+      <h3>Party achievements</h3>
+      <div>
+        Achievements list <!-- TODO@pesok list achievements -->
+      </div>
+
+      <h2>Gloomhaven</h2>
+      <div class="gloomhaven-container">
+        <div>
+          <mat-icon svgIcon="prosperity"></mat-icon>
+          Prosperity: {{party.prosperity}} (x/x) <!-- TODO@pesok change to call party.gloomhaven.prosperity instead -->
+        </div>
+        <div>
+          <mat-icon svgIcon="reputation"></mat-icon>
+          Reputation: {{party.reputation}}
+        </div>
+        <div>
+          <mat-icon svgIcon="prosperity"></mat-icon><!-- TODO@pesok add merchant icon and link for opening storage -->
+          > Merchant
+        </div>
+      </div>
+
+      <h2>Global achievements</h2>
+      <div>
+        Achievements list <!-- TODO@pesok list achievements -->
+      </div>
+    </div>
+  </div>
+
+</div>

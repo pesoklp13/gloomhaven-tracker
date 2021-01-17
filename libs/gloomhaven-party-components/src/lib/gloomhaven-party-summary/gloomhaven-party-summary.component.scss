@@ -1,0 +1,57 @@
+@import 'apps/gloomhaven-tracker/src/colors';
+
+:host {
+  display: flex;
+  flex-grow: 1;
+}
+
+.party-summary {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.summary-content {
+  display: flex;
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.page {
+  background-image: url(/bg/vintage_paper.png);
+  background-repeat: no-repeat;
+  background-size: auto;
+  width: 100%;
+  border-radius: 4px;
+  padding: 10px;
+  color: map-get($ghPrimaryColor, 500);
+}
+
+.gloomhaven-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.party-members {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  .party-member_info {
+    display: flex;
+    flex-direction: row;
+
+    .name_type_holder {
+      padding-left: 2rem;
+    }
+  }
+
+  .party-member_attributes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+}

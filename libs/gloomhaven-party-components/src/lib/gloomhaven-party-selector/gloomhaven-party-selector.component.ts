@@ -1,4 +1,4 @@
-import { Component, Inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Inject } from "@angular/core";
 import { GloomhavenParty, PARTY_SERVICE_TOKEN, PartyService } from "@gloomhaven-tracker/api-interfaces";
 
 @Component({
@@ -6,11 +6,14 @@ import { GloomhavenParty, PARTY_SERVICE_TOKEN, PartyService } from "@gloomhaven-
   templateUrl: "./gloomhaven-party-selector.component.html",
   styleUrls: [
     "./gloomhaven-party-selector.component.scss"
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GloomhavenPartySelectorComponent {
 
   parties: Array<GloomhavenParty>;
+  selectedParty: GloomhavenParty;
+  newParty: boolean;
 
   constructor(@Inject(PARTY_SERVICE_TOKEN) public partyService: PartyService) {
     this.partyService.getParties().subscribe((parties) => {
@@ -19,10 +22,12 @@ export class GloomhavenPartySelectorComponent {
   }
 
   onAddParty() {
-    // TODO@pesok add functionality
+    this.newParty = !this.newParty;
+    this.selectedParty = null;
   }
 
   onSelectParty(selectedParty: GloomhavenParty) {
-    // TODO@pesok add functionality
+    this.selectedParty = this.selectedParty === selectedParty ? null : selectedParty;
+    this.newParty = false;
   }
 }
