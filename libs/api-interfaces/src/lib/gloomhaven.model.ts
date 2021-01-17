@@ -225,3 +225,10 @@ export interface GloomhavenCampaign extends GloomhavenParty {
   story: LinkedList<GloomhavenScenarioResult | GloomhavenCityEvent | GloomhavenRoadEvent>;
   globalAchievements: Array<GloomhavenGlobalAchievement>
 }
+
+export interface Gloomhaven {
+  parties: Array<GloomhavenParty>;
+  prosperity: number;
+  globalAchievements: Array<GloomhavenGlobalAchievement>;
+  merchant: Map<string, GloomhavenItem>;
+}

@@ -6,6 +6,7 @@ import { GloomhavenPartyCardComponent } from './gloomhaven-party-card/gloomhaven
 import { GloomhavenAvatarComponent } from "./gloomhaven-avatar/gloomhaven-avatar.component";
 import { GloomhavenPartySelectorComponent } from "./gloomhaven-party-selector/gloomhaven-party-selector.component";
 import { DeletePartyDialogComponent } from "./gloomhaven-parties/modal/delete-party-dialog.component";
+import { GloomhavenPartySummaryComponent } from "./gloomhaven-party-summary/gloomhaven-party-summary.component";
 
 @NgModule({
   imports: [
@@ -17,13 +18,15 @@ import { DeletePartyDialogComponent } from "./gloomhaven-parties/modal/delete-pa
     GloomhavenPartiesComponent,
     GloomhavenPartyCardComponent,
     GloomhavenPartySelectorComponent,
+    GloomhavenPartySummaryComponent,
     DeletePartyDialogComponent
   ],
   exports: [
     GloomhavenAvatarComponent,
     GloomhavenPartiesComponent,
     GloomhavenPartyCardComponent,
-    GloomhavenPartySelectorComponent
+    GloomhavenPartySelectorComponent,
+    GloomhavenPartySummaryComponent
   ]
 })
 export class GloomhavenPartyComponentsModule {}

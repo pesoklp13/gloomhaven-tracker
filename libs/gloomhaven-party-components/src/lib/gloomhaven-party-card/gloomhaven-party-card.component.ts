@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input, OnInit } from "@angular/core";
 import { GloomhavenParty } from "@gloomhaven-tracker/api-interfaces";
 
 @Component({
   selector: 'ght-party-card',
   templateUrl: './gloomhaven-party-card.component.html',
-  styleUrls: ['./gloomhaven-party-card.component.scss']
+  styleUrls: ['./gloomhaven-party-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GloomhavenPartyCardComponent implements OnInit {
 

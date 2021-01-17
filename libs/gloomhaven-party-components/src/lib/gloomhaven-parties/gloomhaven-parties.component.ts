@@ -1,4 +1,14 @@
-import { Component, ElementRef, EventEmitter, Input, Output, QueryList, Renderer2, ViewChildren } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  QueryList,
+  Renderer2,
+  ViewChildren
+} from "@angular/core";
 import { GloomhavenParty } from "@gloomhaven-tracker/api-interfaces";
 import { MatDialog } from "@angular/material/dialog";
 import { DeletePartyDialogComponent } from "./modal/delete-party-dialog.component";
@@ -8,7 +18,8 @@ const ACCENT_ACTIVE = "accent-active";
 @Component({
   selector: "ght-parties",
   templateUrl: "./gloomhaven-parties.component.html",
-  styleUrls: ["./gloomhaven-parties.component.scss"]
+  styleUrls: ["./gloomhaven-parties.component.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GloomhavenPartiesComponent {
 
