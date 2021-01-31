@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Create party</h1>
+<form>
+  <mat-form-field>
+    <mat-label>Party name</mat-label>
+    <input matInput [(ngModel)]="partyName" type="text" name="partyName"/>
+    <span class="mat-error" *ngIf="error">Party name cannot be empty</span>
+  </mat-form-field>
+</form>
+<div mat-dialog-actions>
+    <button mat-button (click)="dialogRef.close()" cdkFocusInitial>No</button>
+    <button mat-button (click)="save()">Create</button>
+</div>

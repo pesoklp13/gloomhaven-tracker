@@ -4,7 +4,7 @@ import { GloomhavenPartiesComponent } from "./gloomhaven-parties.component";
 import { MaterialMockModule } from "../../../../common-components/src/lib/material/material-mock.module.spec";
 import { GloomhavenAvatarComponent } from "../gloomhaven-avatar/gloomhaven-avatar.component";
 import { ElementRef, QueryList, Renderer2, Type } from "@angular/core";
-import { GloomhavenParty } from "@gloomhaven-tracker/api-interfaces";
+import { GloomhavenCampaign } from "@gloomhaven-tracker/api-interfaces";
 import { MatDialog } from "@angular/material/dialog";
 import { of } from "rxjs";
 
@@ -58,10 +58,10 @@ describe("GloomhavenPartiesComponent", () => {
   });
 
   it("should emit selected party", () => {
-    const party: GloomhavenParty = {
+    const party: GloomhavenCampaign = {
       name: "Test Party"
     } as any;
-    const emitSpy = jest.spyOn(component.selectParty, 'emit');
+    const emitSpy = jest.spyOn(component.selectedCampaign, 'emit');
 
     component.selectPartyClicked(createMouseEventStub(), party);
 
@@ -69,10 +69,10 @@ describe("GloomhavenPartiesComponent", () => {
   });
 
   it("should emit deselect party", () => {
-    const party: GloomhavenParty = {
+    const party: GloomhavenCampaign = {
       name: "Test Party"
     } as any;
-    const emitSpy = jest.spyOn(component.selectParty, 'emit');
+    const emitSpy = jest.spyOn(component.selectedCampaign, 'emit');
 
     component.selectPartyClicked(createMouseEventStub(["accent-active"]), party);
 
@@ -96,10 +96,10 @@ describe("GloomhavenPartiesComponent", () => {
   });
 
   it("should emit delete party when confirmed deletion", fakeAsync(() => {
-    const party: GloomhavenParty = {
+    const party: GloomhavenCampaign = {
       name: "Test Party"
     } as any;
-    const emitSpy = jest.spyOn(component.deleteParty, 'emit');
+    const emitSpy = jest.spyOn(component.deleteCampaign, 'emit');
 
     const matDialogRef = {
       afterClosed: () => of(true)
@@ -113,10 +113,10 @@ describe("GloomhavenPartiesComponent", () => {
   }));
 
   it("should not emit delete party when cancelled deletion", fakeAsync(() => {
-    const party: GloomhavenParty = {
+    const party: GloomhavenCampaign = {
       name: "Test Party"
     } as any;
-    const emitSpy = jest.spyOn(component.deleteParty, 'emit');
+    const emitSpy = jest.spyOn(component.deleteCampaign, 'emit');
 
     const matDialogRef = {
       afterClosed: () => of(undefined)

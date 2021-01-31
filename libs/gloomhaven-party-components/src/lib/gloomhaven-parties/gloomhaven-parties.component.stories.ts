@@ -56,7 +56,7 @@ const moduleMetadata = {
 export const NoParties = () => ({
   moduleMetadata,
   component: GloomhavenPartiesComponent,
-  template: `<ght-parties [parties]="parties"></ght-parties>`,
+  template: `<ght-parties [campaigns]="parties"></ght-parties>`,
   props: {
     parties: []
   }
@@ -65,7 +65,7 @@ export const NoParties = () => ({
 export const ThreeParties = () => ({
   moduleMetadata,
   component: GloomhavenPartiesComponent,
-  template: `<ght-parties [parties]="parties"></ght-parties>`,
+  template: `<ght-parties [campaigns]="parties"></ght-parties>`,
   props: {
     parties: [
       {

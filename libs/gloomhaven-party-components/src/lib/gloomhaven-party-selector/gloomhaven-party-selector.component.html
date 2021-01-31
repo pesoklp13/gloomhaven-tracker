@@ -1,7 +1,6 @@
 <div class="party-selector">
-  <ght-parties [parties]="parties" (addParty)="onAddParty()" (selectParty)="onSelectParty($event)"></ght-parties>
+  <ght-parties [campaigns]="campaigns" (addParty)="onAddParty()" (selectedCampaign)="onSelectParty($event)" (deleteCampaign)="onDeleteParty($event)"></ght-parties>
   <div class="party-summary">
-    <ght-party-summary [party]="selectedParty || parties[0]" *ngIf="!newParty"></ght-party-summary>
-    <div *ngIf="newParty"><!-- TODO@pesok add create party view -->Creating a new party</div>
+    <ght-party-summary [campaign]="selectedParty"></ght-party-summary>
   </div>
 </div>

@@ -1,13 +1,13 @@
-<div *ngIf="party == null">Please select party or create a new one.</div>
-<div *ngIf="party != null" class="party-summary">
+<div *ngIf="campaign == null" class="party-summary">Please select party or create a new one.</div>
+<div *ngIf="campaign != null" class="party-summary">
 
   <div class="summary-content">
     <div class="page">
-      <h2>Party: {{party.name}}</h2>
+      <h2>Party: {{campaign.party.name}}</h2>
       <div class="gloomhaven-container">
         <div>
           <mat-icon svgIcon="map"></mat-icon>
-          Current location: {{party.location || 'Gloomhaven'}}
+          Current location: {{campaign.party.currentLocation.name || 'Gloomhaven'}}
         </div>
         <div>
           <mat-icon svgIcon="map"></mat-icon>
@@ -24,12 +24,12 @@
       </div>
       <h3>Members</h3>
       <div class="party-members">
-        <div class="party-member" *ngFor="let hero of party.members">
+        <div class="party-member" *ngFor="let hero of campaign.party.members">
           <div class="party-member_info">
-            <ght-avatar [name]="hero.type.name"></ght-avatar>
+            <ght-avatar [name]="hero.character.name"></ght-avatar>
             <div class="name_type_holder">
               <div class="name">{{hero.name}}</div>
-              <div class="type">{{hero.type.name}}</div>
+              <div class="type">{{hero.character.name}}</div>
             </div>
           </div>
           <div class="party-member_attributes">
@@ -51,11 +51,11 @@
       <div class="gloomhaven-container">
         <div>
           <mat-icon svgIcon="prosperity"></mat-icon>
-          Prosperity: {{party.prosperity}} (x/x) <!-- TODO@pesok change to call party.gloomhaven.prosperity instead -->
+          Prosperity: {{campaign.gloomhaven.prosperity}} (x/x) <!-- TODO@pesok change to call party.gloomhaven.prosperity instead -->
         </div>
         <div>
           <mat-icon svgIcon="reputation"></mat-icon>
-          Reputation: {{party.reputation}}
+          Reputation: {{campaign.party.reputation}}
         </div>
         <div>
           <mat-icon svgIcon="prosperity"></mat-icon><!-- TODO@pesok add merchant icon and link for opening storage -->
