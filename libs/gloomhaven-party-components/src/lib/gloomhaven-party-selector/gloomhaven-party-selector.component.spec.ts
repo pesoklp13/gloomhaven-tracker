@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { NoopAnimationsModule } from "@angular/platform-browser/animations";
-import { GloomhavenParty, PARTY_SERVICE_TOKEN } from "@gloomhaven-tracker/api-interfaces";
+import { GloomhavenCampaign, CAMPAIGN_SERVICE_TOKEN } from "@gloomhaven-tracker/api-interfaces";
 import { Observable, of } from "rxjs";
 // tslint:disable-next-line:nx-enforce-module-boundaries
 import { MaterialMockModule } from "../../../../common-components/src/lib/material/material-mock.module.spec";
@@ -25,8 +25,8 @@ describe("GloomhavenPartySelectorComponent", () => {
       ],
       providers: [
         {
-          provide: PARTY_SERVICE_TOKEN, useValue: {
-            getParties(): Observable<Array<GloomhavenParty>> {
+          provide: CAMPAIGN_SERVICE_TOKEN, useValue: {
+            getParties(): Observable<Array<GloomhavenCampaign>> {
               return of([]);
             }
           }

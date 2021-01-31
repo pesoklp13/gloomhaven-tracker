@@ -11,6 +11,8 @@ import { MatDividerModule } from "@angular/material/divider";
 import { MatTooltipModule } from "@angular/material/tooltip";
 import { MatDialogModule } from "@angular/material/dialog";
 import { A11yModule } from "@angular/cdk/a11y";
+import {MatInputModule} from "@angular/material/input";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -35,6 +37,8 @@ class MatMockIconComponent {
     MatDividerModule,
     MatTooltipModule,
     MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
     A11yModule
   ],
   exports: [
@@ -49,6 +53,8 @@ class MatMockIconComponent {
     MatTooltipModule,
     MatMockIconComponent,
     MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
     A11yModule
   ]
 })

@@ -1,5 +1,8 @@
-import { ChangeDetectionStrategy, Component, Inject } from "@angular/core";
-import { GloomhavenParty, PARTY_SERVICE_TOKEN, PartyService } from "@gloomhaven-tracker/api-interfaces";
+import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
+import {GloomhavenCampaign} from "@gloomhaven-tracker/api-interfaces";
+import {PartyStorageService} from "../../../../persistence/src/lib/party-storage.service";
+import {MatDialog} from "@angular/material/dialog";
+import {AddPartyDialogComponent} from "./modal/add-party-dialog.component";
 
 @Component({
   selector: 'ght-party-selector',
@@ -7,27 +10,45 @@ import { GloomhavenParty, PARTY_SERVICE_TOKEN, PartyService } from "@gloomhaven-
   styleUrls: [
     "./gloomhaven-party-selector.component.scss"
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  //changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GloomhavenPartySelectorComponent {
+export class GloomhavenPartySelectorComponent implements OnInit {
 
-  parties: Array<GloomhavenParty>;
-  selectedParty: GloomhavenParty;
-  newParty: boolean;
+  campaigns: Array<GloomhavenCampaign>;
+  selectedParty: GloomhavenCampaign;
 
-  constructor(@Inject(PARTY_SERVICE_TOKEN) public partyService: PartyService) {
-    this.partyService.getParties().subscribe((parties) => {
-      this.parties = parties;
+  constructor(private partyService: PartyStorageService, private dialog: MatDialog) {}
+
+  ngOnInit() {
+    this.partyService.fetchParties().subscribe((campaigns) => {
+      this.campaigns = campaigns;
     });
   }
 
   onAddParty() {
-    this.newParty = !this.newParty;
     this.selectedParty = null;
+
+    const addDialog = this.dialog.open<AddPartyDialogComponent, any, string>(AddPartyDialogComponent);
+
+    addDialog.afterClosed().subscribe(partyName => {
+      if (partyName) {
+        // TODO@pesok add response to operation
+        this.partyService.createParty(partyName).subscribe(() => {
+          this.ngOnInit();
+        });
+      }
+    })
   }
 
-  onSelectParty(selectedParty: GloomhavenParty) {
+  onSelectParty(selectedParty: GloomhavenCampaign) {
     this.selectedParty = this.selectedParty === selectedParty ? null : selectedParty;
-    this.newParty = false;
+  }
+
+  onDeleteParty(id: number) {
+    // TODO@pesok add notification when success or failure
+    this.partyService.deleteParty(id).subscribe(() => {
+      this.ngOnInit();
+      this.selectedParty = null;
+    });
   }
 }

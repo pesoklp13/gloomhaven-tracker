@@ -9,7 +9,7 @@ import {
   Renderer2,
   ViewChildren
 } from "@angular/core";
-import { GloomhavenParty } from "@gloomhaven-tracker/api-interfaces";
+import { GloomhavenCampaign } from "@gloomhaven-tracker/api-interfaces";
 import { MatDialog } from "@angular/material/dialog";
 import { DeletePartyDialogComponent } from "./modal/delete-party-dialog.component";
 
@@ -26,16 +26,16 @@ export class GloomhavenPartiesComponent {
   constructor(private renderer: Renderer2, private dialog: MatDialog) {}
 
   @Input()
-  parties: Array<GloomhavenParty>;
+  campaigns: Array<GloomhavenCampaign>;
 
   @Output()
   addParty: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Output()
-  selectParty: EventEmitter<GloomhavenParty | null> = new EventEmitter<GloomhavenParty | null>();
+  selectedCampaign: EventEmitter<GloomhavenCampaign | null> = new EventEmitter<GloomhavenCampaign | null>();
 
   @Output()
-  deleteParty: EventEmitter<GloomhavenParty> = new EventEmitter<GloomhavenParty>();
+  deleteCampaign: EventEmitter<number> = new EventEmitter<number>();
 
   @ViewChildren("card, addNew", { read: ElementRef }) cardRefs: QueryList<ElementRef>;
 
@@ -43,19 +43,20 @@ export class GloomhavenPartiesComponent {
     return element.classList.contains(ACCENT_ACTIVE);
   }
 
-  selectPartyClicked($event: MouseEvent, party: GloomhavenParty) {
+  selectPartyClicked($event: MouseEvent, party: GloomhavenCampaign) {
     const activated = this.toggleActive($event);
 
-    this.selectParty.emit(activated ? party : null);
+    this.selectedCampaign.emit(activated ? party : null);
   }
 
   createNewPartyClicked($event: MouseEvent) {
     const activated = this.toggleActive($event);
+    this.removeActive($event);
 
     this.addParty.emit(activated);
   }
 
-  deletePartyClicked($event: MouseEvent, party: GloomhavenParty) {
+  deletePartyClicked($event: MouseEvent, party: GloomhavenCampaign, id: number) {
     const deleteDialog = this.dialog.open(DeletePartyDialogComponent, {
       data: party
     });
@@ -63,7 +64,7 @@ export class GloomhavenPartiesComponent {
     deleteDialog.afterClosed()
       .subscribe(confirmed => {
         if (confirmed) {
-          this.deleteParty.emit(party);
+          this.deleteCampaign.emit(id);
         }
       });
   }

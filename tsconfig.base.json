@@ -27,7 +27,8 @@
       ],
       "@gloomhaven-tracker/common-components": [
         "libs/common-components/src/index.ts"
-      ]
+      ],
+      "@gloomhaven-tracker/persistence": ["libs/persistence/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

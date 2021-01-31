@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
-import { GloomhavenParty } from "@gloomhaven-tracker/api-interfaces";
+import { GloomhavenCampaign } from "@gloomhaven-tracker/api-interfaces";
 
 @Component({
   selector: 'ght-party-summary',
@@ -9,6 +9,6 @@ import { GloomhavenParty } from "@gloomhaven-tracker/api-interfaces";
 })
 export class GloomhavenPartySummaryComponent {
 
-  @Input() party: GloomhavenParty | null;
+  @Input() campaign: GloomhavenCampaign | null;
 
 }
