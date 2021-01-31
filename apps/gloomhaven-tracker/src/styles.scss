@@ -89,6 +89,12 @@ main {
   }
 }
 
+.mat-toolbar {
+  h1 {
+    font-family: 'Pirata One', serif;
+  }
+}
+
 .accent-active {
   box-shadow: inset 2000px 0 0 0 rgba(8, 91, 255, 0.5) !important;
   border-color: rgba(8, 91, 255, 1) !important;
