@@ -55,3 +55,14 @@
     margin-top: 1rem;
   }
 }
+
+@media (max-width: 800px) {
+
+  .party-summary, .summary-content {
+    padding: 0;
+  }
+
+  .party-summary.no-selected {
+    padding: 20px;
+  }
+}

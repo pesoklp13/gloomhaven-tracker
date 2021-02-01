@@ -9,12 +9,6 @@
   flex-direction: row;
 }
 
-@media (max-width: 800px) {
-  .party-selector {
-    flex-direction: column;
-  }
-}
-
 .party-summary {
   display: flex;
   flex: 1;
@@ -26,5 +20,18 @@
   mat-card {
     background-color: transparent;
     background-image: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .party-selector {
+    flex-direction: column;
+  }
+
+  ::ng-deep ght-parties .party mat-card{
+    max-width: inherit !important;
+  }
+  .party-summary {
+    margin: 5px;
   }
 }
