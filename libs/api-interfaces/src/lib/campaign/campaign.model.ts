@@ -6,6 +6,7 @@ export interface Gloomhaven {
 }
 
 export interface GloomhavenCampaign {
+  uid: string;
   gloomhaven: Gloomhaven;
   party: GloomhavenParty;
 }

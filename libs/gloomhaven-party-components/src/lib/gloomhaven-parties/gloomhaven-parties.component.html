@@ -1,5 +1,5 @@
 <div class="parties-container">
-  <div class="party" *ngFor="let campaign of campaigns; index as id">
+  <div class="party" *ngFor="let campaign of campaigns">
     <mat-card #card (click)="selectPartyClicked($event, campaign)">
       <mat-card-header class="party-info">
         <mat-card-title class="party-name">{{campaign.party.name}}</mat-card-title>
@@ -15,7 +15,7 @@
         </mat-card-subtitle>
       </mat-card-header>
     </mat-card>
-    <div class="delete-action" (click)="deletePartyClicked($event, campaign, id)">
+    <div class="delete-action" (click)="deletePartyClicked($event, campaign)">
       <mat-icon>delete</mat-icon>
     </div>
   </div>

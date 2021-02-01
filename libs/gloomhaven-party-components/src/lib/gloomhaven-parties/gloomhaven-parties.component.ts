@@ -35,7 +35,7 @@ export class GloomhavenPartiesComponent {
   selectedCampaign: EventEmitter<GloomhavenCampaign | null> = new EventEmitter<GloomhavenCampaign | null>();
 
   @Output()
-  deleteCampaign: EventEmitter<number> = new EventEmitter<number>();
+  deleteCampaign: EventEmitter<string> = new EventEmitter<string>();
 
   @ViewChildren("card, addNew", { read: ElementRef }) cardRefs: QueryList<ElementRef>;
 
@@ -56,7 +56,7 @@ export class GloomhavenPartiesComponent {
     this.addParty.emit(activated);
   }
 
-  deletePartyClicked($event: MouseEvent, party: GloomhavenCampaign, id: number) {
+  deletePartyClicked($event: MouseEvent, party: GloomhavenCampaign) {
     const deleteDialog = this.dialog.open(DeletePartyDialogComponent, {
       data: party
     });
@@ -64,7 +64,7 @@ export class GloomhavenPartiesComponent {
     deleteDialog.afterClosed()
       .subscribe(confirmed => {
         if (confirmed) {
-          this.deleteCampaign.emit(id);
+          this.deleteCampaign.emit(party.uid);
         }
       });
   }

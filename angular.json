@@ -339,6 +339,31 @@
           }
         }
       }
+    },
+    "common-services": {
+      "projectType": "library",
+      "root": "libs/common-services",
+      "sourceRoot": "libs/common-services/src",
+      "prefix": "gloomhaven-tracker",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/common-services/src/**/*.ts",
+              "libs/common-services/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/common-services"],
+          "options": {
+            "jestConfig": "libs/common-services/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
