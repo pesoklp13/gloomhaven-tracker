@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {JSONSchemaArray, JSONSchemaObject, StorageMap} from '@ngx-pwa/local-storage';
 import {GloomhavenCampaign} from '@gloomhaven-tracker/api-interfaces';
 import {map, mergeMap, tap} from 'rxjs/operators';
-import {Observable, of} from 'rxjs';
+import {iif, Observable, of} from 'rxjs';
+import {UUIDService} from '@gloomhaven-tracker/common-services';
 
 const CAMPAIGNS_KEY = 'campaigns';
 
@@ -13,10 +14,11 @@ const SCHEMA_ARRAY_OF_OBJECTS: JSONSchemaArray = {type: 'array', items: SCHEMA_O
 @Injectable()
 export class PartyStorageService {
 
-  constructor(private storage: StorageMap) {}
+  constructor(private storage: StorageMap, private uuid: UUIDService) {}
 
-  public createParty(partyName: string): Observable<undefined> {
+  public createParty(partyName: string): Observable<string> {
     const campaign: GloomhavenCampaign = {
+      uid: this.uuid.uuid4(),
       gloomhaven: {
         prosperity: 0,
         achievements: []
@@ -34,7 +36,8 @@ export class PartyStorageService {
 
     return this.fetchParties().pipe(
       tap(campaigns => campaigns.push(campaign)),
-      mergeMap(campaigns => this.storage.set(CAMPAIGNS_KEY, campaigns))
+      mergeMap(campaigns => this.storage.set(CAMPAIGNS_KEY, campaigns)),
+      mergeMap(() => of(campaign.uid))
     );
   }
 
@@ -45,21 +48,17 @@ export class PartyStorageService {
     );
   }
 
-  public deleteParty(id: number): Observable<string | undefined> {
-    if (id < 0) {
-      return of('Unable to remove non existing element. Negative value');
-    }
-
+  public deleteParty(uid: string): Observable<string | undefined> {
     return this.fetchParties().pipe(
       mergeMap(campaigns => {
-        if (campaigns.length == 0 || campaigns.length <= id) {
-          return of('Unable to remove non existing element. Index out of bounds');
+        const updatedCampaigns = campaigns.filter((campaign) => campaign.uid !== uid);
+
+        if (updatedCampaigns.length === campaigns.length) {
+          return of('Unable to remove non existing element');
         }
 
-        campaigns.splice(id, 1);
-
-        return this.storage.set(CAMPAIGNS_KEY, campaigns);
+        return this.storage.set(CAMPAIGNS_KEY, updatedCampaigns);
       })
-    )
+    );
   }
 }

@@ -6,6 +6,7 @@ describe('PartyStorageService', () => {
   let service: PartyStorageService;
   let storageStub: any;
   let testScheduler: TestScheduler;
+  const NIL_UUID = '00000000-0000-0000-0000-000000000000';
 
   beforeEach(() => {
     storageStub = {
@@ -15,7 +16,7 @@ describe('PartyStorageService', () => {
 
     storageStub.set.mockImplementation(() => of(undefined));
 
-    service = new PartyStorageService(storageStub);
+    service = new PartyStorageService(storageStub, { uuid4: () => NIL_UUID });
     testScheduler = new TestScheduler((actual, expected) => {
       expect(actual).toEqual(expected);
     });
@@ -27,6 +28,7 @@ describe('PartyStorageService', () => {
       storageStub.get.mockImplementation(() => of(undefined));
 
       const expectedCampaigns = [{
+        uid: NIL_UUID,
         gloomhaven: {
           prosperity: 0,
           achievements: []
@@ -44,10 +46,10 @@ describe('PartyStorageService', () => {
 
       testScheduler.run(({expectObservable, flush}) => {
         expectObservable(service.createParty('first party')).toBe('(a|)', {
-          a: undefined
+          a: NIL_UUID
         });
         flush();
-        expect(storageStub.get).toBeCalledWith('campaigns', expect.anything());
+        expect(storageStub.get).toBeCalledWith('campaigns');
         expect(storageStub.set).toBeCalledWith('campaigns', expectedCampaigns);
       });
     });
@@ -55,6 +57,7 @@ describe('PartyStorageService', () => {
     it('should add party with name', () => {
       storageStub.get.mockImplementation(() => of([
         {
+          uid: NIL_UUID,
           gloomhaven: {
             prosperity: 0,
             achievements: []
@@ -73,6 +76,7 @@ describe('PartyStorageService', () => {
 
       const expectedCampaigns = [
         {
+          uid: NIL_UUID,
           gloomhaven: {
             prosperity: 0,
             achievements: []
@@ -88,27 +92,28 @@ describe('PartyStorageService', () => {
           }
         },
         {
-        gloomhaven: {
-          prosperity: 0,
-          achievements: []
-        },
-        party: {
-          name: 'test party',
-          reputation: 0,
-          achievements: [],
-          currentLocation: {
-            name: 'Gloomhaven'
+          uid: NIL_UUID,
+          gloomhaven: {
+            prosperity: 0,
+            achievements: []
           },
-          members: []
-        }
+          party: {
+            name: 'test party',
+            reputation: 0,
+            achievements: [],
+            currentLocation: {
+              name: 'Gloomhaven'
+            },
+            members: []
+          }
       }];
 
       testScheduler.run(({expectObservable, flush}) => {
         expectObservable(service.createParty('test party')).toBe('(a|)', {
-          a: undefined
+          a: NIL_UUID
         });
         flush();
-        expect(storageStub.get).toBeCalledWith('campaigns', expect.anything());
+        expect(storageStub.get).toBeCalledWith('campaigns');
         expect(storageStub.set).toBeCalledWith('campaigns', expectedCampaigns);
       });
     });
@@ -117,28 +122,15 @@ describe('PartyStorageService', () => {
 
   describe('deleteParty', () => {
 
-    it('should return error when negative value', () => {
-      storageStub.get.mockImplementation(() => of(undefined));
-
-      testScheduler.run(({expectObservable, flush}) => {
-        expectObservable(service.deleteParty(-1)).toBe('(a|)', {
-          a: 'Unable to remove non existing element. Negative value'
-        });
-        flush();
-        expect(storageStub.get).not.toBeCalled();
-        expect(storageStub.set).not.toBeCalled();
-      });
-    });
-
     it('should return error when higher value', () => {
       storageStub.get.mockImplementation(() => of(undefined));
 
       testScheduler.run(({expectObservable, flush}) => {
-        expectObservable(service.deleteParty(3)).toBe('(a|)', {
-          a: 'Unable to remove non existing element. Index out of bounds'
+        expectObservable(service.deleteParty('13')).toBe('(a|)', {
+          a: 'Unable to remove non existing element'
         });
         flush();
-        expect(storageStub.get).toBeCalledWith('campaigns', expect.anything());
+        expect(storageStub.get).toBeCalledWith('campaigns');
         expect(storageStub.set).not.toBeCalled();
       });
     });
@@ -147,6 +139,7 @@ describe('PartyStorageService', () => {
       storageStub.get.mockImplementation(() => of(
         [
           {
+            uid: NIL_UUID,
             gloomhaven: {
               prosperity: 0,
               achievements: []
@@ -162,6 +155,7 @@ describe('PartyStorageService', () => {
             }
           },
           {
+            uid: '13',
             gloomhaven: {
               prosperity: 0,
               achievements: []
@@ -179,6 +173,7 @@ describe('PartyStorageService', () => {
       ));
 
       const expectedCampaigns = [{
+        uid: NIL_UUID,
         gloomhaven: {
           prosperity: 0,
           achievements: []
@@ -195,11 +190,11 @@ describe('PartyStorageService', () => {
       }];
 
       testScheduler.run(({expectObservable, flush}) => {
-        expectObservable(service.deleteParty(1)).toBe('(a|)', {
+        expectObservable(service.deleteParty('13')).toBe('(a|)', {
           a: undefined
         });
         flush();
-        expect(storageStub.get).toBeCalledWith('campaigns', expect.anything());
+        expect(storageStub.get).toBeCalledWith('campaigns');
         expect(storageStub.set).toBeCalledWith('campaigns', expectedCampaigns);
       });
     });

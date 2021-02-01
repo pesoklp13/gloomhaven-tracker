@@ -29,6 +29,7 @@
     "common-library": { "tags": [] },
     "gloomhaven-party-components": { "tags": [] },
     "common-components": { "tags": [] },
-    "persistence": { "tags": [] }
+    "persistence": { "tags": [] },
+    "common-services": { "tags": [] }
   }
 }

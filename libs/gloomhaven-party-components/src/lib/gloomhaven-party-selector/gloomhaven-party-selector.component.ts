@@ -1,6 +1,6 @@
-import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {GloomhavenCampaign} from "@gloomhaven-tracker/api-interfaces";
-import {PartyStorageService} from "../../../../persistence/src/lib/party-storage.service";
+import {PartyStorageService} from "@gloomhaven-tracker/persistence";
 import {MatDialog} from "@angular/material/dialog";
 import {AddPartyDialogComponent} from "./modal/add-party-dialog.component";
 
@@ -9,8 +9,7 @@ import {AddPartyDialogComponent} from "./modal/add-party-dialog.component";
   templateUrl: "./gloomhaven-party-selector.component.html",
   styleUrls: [
     "./gloomhaven-party-selector.component.scss"
-  ],
-  //changeDetection: ChangeDetectionStrategy.OnPush
+  ]
 })
 export class GloomhavenPartySelectorComponent implements OnInit {
 
@@ -20,9 +19,7 @@ export class GloomhavenPartySelectorComponent implements OnInit {
   constructor(private partyService: PartyStorageService, private dialog: MatDialog) {}
 
   ngOnInit() {
-    this.partyService.fetchParties().subscribe((campaigns) => {
-      this.campaigns = campaigns;
-    });
+    this.loadParties();
   }
 
   onAddParty() {
@@ -33,8 +30,8 @@ export class GloomhavenPartySelectorComponent implements OnInit {
     addDialog.afterClosed().subscribe(partyName => {
       if (partyName) {
         // TODO@pesok add response to operation
-        this.partyService.createParty(partyName).subscribe(() => {
-          this.ngOnInit();
+        this.partyService.createParty(partyName).subscribe((uid) => {
+          this.loadParties(uid);
         });
       }
     })
@@ -44,11 +41,23 @@ export class GloomhavenPartySelectorComponent implements OnInit {
     this.selectedParty = this.selectedParty === selectedParty ? null : selectedParty;
   }
 
-  onDeleteParty(id: number) {
+  onDeleteParty(uid: string) {
     // TODO@pesok add notification when success or failure
-    this.partyService.deleteParty(id).subscribe(() => {
-      this.ngOnInit();
-      this.selectedParty = null;
+    this.partyService.deleteParty(uid).subscribe(() => {
+      this.loadParties();
+
+      if (this.selectedParty.uid === uid) {
+        this.selectedParty = null;
+      }
+    });
+  }
+
+  private loadParties(uid?: string): void {
+    this.partyService.fetchParties().subscribe((campaigns) => {
+      this.campaigns = campaigns;
+      if (uid) {
+        this.selectedParty = this.campaigns.find(campaign => campaign.uid === uid);
+      }
     });
   }
 }
